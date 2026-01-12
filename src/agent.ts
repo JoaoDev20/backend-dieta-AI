@@ -18,8 +18,9 @@ export async function* generateDietPlan(input: DietPlanRequest){
   const stream = await client.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
-        {role: "system", content: "Você é uma Assistente de nuticionista X"},
-        {role: "user", content: "Quem é você?"}
+        {role: "system", content: buildSystemPrompt()},
+        {role: "system", content : buildDocsSystemPrompt(diretrizes)},
+        {role: "user", content: buildUserPrompt(input)}
     //     {role: "system", content: buildSystemPrompt()},
     //     {role: "user", content: buildUserPrompt(input)}
      ],
